@@ -1,0 +1,278 @@
+<?php header('Content-Type: text/html; charset=UTF-8'); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18+ Only</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100%;background:#0d0d0d;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+  body{display:flex;align-items:flex-start;justify-content:center;padding:40px 16px 48px}
+  .wrap{width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .badge{display:inline-block;background:#1a0a00;border:1.5px solid #c04a00;color:#e0621a;font-size:12px;font-weight:700;letter-spacing:0.12em;padding:5px 18px;border-radius:999px;margin-bottom:22px}
+  h1{font-size:clamp(26px,7vw,36px);font-weight:800;line-height:1.18;margin-bottom:14px;color:#fff}
+  .sub{font-size:15px;color:#aaa;line-height:1.6;margin-bottom:28px}
+  .sub strong{color:#fff;font-weight:600}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;margin-bottom:12px}
+  .cell{aspect-ratio:1;border-radius:10px;background:#1a1020;overflow:hidden;position:relative}
+  .cell img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .blur-layer{position:absolute;inset:0;width:100%;height:100%;backdrop-filter:blur(14px) brightness(0.7);-webkit-backdrop-filter:blur(14px) brightness(0.7);-webkit-mask-image:linear-gradient(to bottom,black 0%,black 45%,transparent 75%);mask-image:linear-gradient(to bottom,black 0%,black 45%,transparent 75%);animation:maskShift 3s ease-in-out infinite alternate}
+  @keyframes maskShift{0%{-webkit-mask-image:linear-gradient(to bottom,black 0%,black 40%,transparent 68%);mask-image:linear-gradient(to bottom,black 0%,black 40%,transparent 68%)}50%{-webkit-mask-image:linear-gradient(to bottom,black 0%,black 52%,transparent 80%);mask-image:linear-gradient(to bottom,black 0%,black 52%,transparent 80%)}100%{-webkit-mask-image:linear-gradient(to bottom,black 0%,black 44%,transparent 72%);mask-image:linear-gradient(to bottom,black 0%,black 44%,transparent 72%)}}
+  .blur-layer::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,0.03) 0px,rgba(255,255,255,0.03) 1px,transparent 1px,transparent 4px);animation:scanFlicker 0.18s steps(1) infinite;pointer-events:none}
+  @keyframes scanFlicker{0%{opacity:0.6}50%{opacity:1}100%{opacity:0.7}}
+  .lock-wrap{position:absolute;top:0;left:0;right:0;height:60%;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:3}
+  .lock-circle{width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;animation:lockPulse 2.4s ease-in-out infinite}
+  @keyframes lockPulse{0%,100%{transform:scale(1);opacity:0.9}50%{transform:scale(1.1);opacity:1}}
+  .lock-wrap svg{width:18px;height:18px}
+  .cell.empty{background:#1a1020}
+  .cell.empty::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(180,80,0,0.18),transparent 70%)}
+  .tap-hint{font-size:13px;color:#666;margin-bottom:24px}
+  .textbox{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:14px;padding:22px 20px;width:100%;text-align:left;margin-bottom:24px;margin-top:4px}
+  .textbox p{font-size:15px;color:#ccc;line-height:1.65;margin-bottom:8px}
+  .textbox p:last-child{margin-bottom:0;font-size:13px;color:#555}
+  .textbox strong{color:#fff;font-weight:700}
+  .counter{display:flex;align-items:center;gap:8px;font-size:14px;color:#bbb;margin-bottom:20px;align-self:flex-start}
+  .dot{width:9px;height:9px;border-radius:50%;background:#22c55e;flex-shrink:0;box-shadow:0 0 6px #22c55e99;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  .cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#e8222a;color:#fff;border:none;border-radius:12px;padding:18px 24px;font-size:18px;font-weight:800;cursor:pointer;transition:background 0.15s,transform 0.1s;text-decoration:none}
+  .cta:hover{background:#c81820}
+  .cta:active{transform:scale(0.98)}
+  .age-confirm{font-size:12px;color:#555;margin-top:10px;margin-bottom:18px}
+  .secured{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:#555}
+  .secured svg{width:14px;height:14px;opacity:0.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="badge">18+ ONLY</div>
+  <h1>Yeah, we know what<br>you're thinking right now.</h1>
+  <p class="sub">And honestly? <strong>Same.</strong><br>Just&hellip; see for yourself.</p>
+  <div class="grid">
+    <div class="cell empty" id="cell1">
+      <img id="gif1" src="" alt="" style="display:none">
+      <div class="blur-layer"></div>
+      <div class="lock-wrap"><div class="lock-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c07030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        </svg>
+      </div></div>
+    </div>
+    <div class="cell empty" id="cell2">
+      <img id="gif2" src="" alt="" style="display:none">
+      <div class="blur-layer"></div>
+      <div class="lock-wrap"><div class="lock-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#d04020" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        </svg>
+      </div></div>
+    </div>
+    <div class="cell empty" id="cell3">
+      <img id="gif3" src="" alt="" style="display:none">
+      <div class="blur-layer"></div>
+      <div class="lock-wrap"><div class="lock-circle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c07030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+        </svg>
+      </div></div>
+    </div>
+  </div>
+  <p class="tap-hint">Tap to unblur &mdash; free access, no signup needed</p>
+  <div class="textbox">
+    <p>Look, we're not going to pretend this is something it's not.</p>
+    <p>You landed here. <strong>We both know why.</strong></p>
+    <p>No judgment &mdash; literally everyone does it.</p>
+    <p>(Your browser history is your business. Not ours.)</p>
+  </div>
+  <div class="counter">
+    <span class="dot"></span>
+    <span><strong style="color:#fff">your area</strong> &mdash; <span id="viewers">605</span> people viewing right now</span>
+  </div>
+  <a href="#" class="cta" id="ctaBtn" onclick="handleClick(event,this)">
+    Fine. I'll click it. &nbsp;&rarr;
+  </a>
+  <p class="age-confirm">By continuing you confirm you are 18+ and agree to our terms.</p>
+  <div class="secured">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+    Secured &amp; private &middot; No credit card required
+  </div>
+</div>
+<script>
+  // ============================================================
+  // CONFIG — ganti sesuai kebutuhan
+  // ============================================================
+  var GIF_1      = "https://imagex1.sx.cdn.live/images/pinporn/2021/11/01/26171159.webp";
+  var GIF_2      = "https://imagex1.sx.cdn.live/images/pinporn/2016/08/18/16383003.webp";
+  var GIF_3      = "https://imagex1.sx.cdn.live/images/pinporn/2016/05/28/15795813.webp";
+  var OFFER_URL  = "https://www.effectivecpmnetwork.com/mtqzishs?key=40174ac555fe1238c3537ec02e66ffaa"; // <-- GANTI INI
+  var SHEET_URL  = "https://script.google.com/macros/s/AKfycbziXyWaU52lRGiVV5mX_l7AErP4BHiFtQWZfhr7kuZhbOnGX54wdaTLZwtvQpE-fki9/exec";
+
+  // ============================================================
+  // Load GIFs
+  // ============================================================
+  function loadGif(cellId, imgId, src) {
+    if (!src) return;
+    var cell = document.getElementById(cellId);
+    var img  = document.getElementById(imgId);
+    cell.classList.remove('empty');
+    img.src = src;
+    img.style.display = 'block';
+  }
+  loadGif('cell1','gif1',GIF_1);
+  loadGif('cell2','gif2',GIF_2);
+  loadGif('cell3','gif3',GIF_3);
+
+  // ============================================================
+  // Live viewer counter
+  // ============================================================
+  var base = 605;
+  var el = document.getElementById('viewers');
+  setInterval(function(){
+    base += Math.floor(Math.random()*5)-2;
+    if(base<580) base=580;
+    if(base>640) base=640;
+    el.textContent = base;
+  }, 3200);
+
+  // ============================================================
+  // Device & Browser detection
+  // ============================================================
+  function getDeviceInfo() {
+    var ua = navigator.userAgent;
+    var platform = 'Desktop';
+    var os = 'Unknown';
+    var osVersion = '';
+    var browser = 'Unknown';
+    var browserVersion = '';
+
+    // Platform
+    if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) {
+      platform = 'Mobile';
+    }
+
+    // OS detection
+    if (/Windows NT/i.test(ua)) {
+      os = 'Windows';
+      var m = ua.match(/Windows NT ([\d.]+)/);
+      var winMap = {'10.0':'10','6.3':'8.1','6.2':'8','6.1':'7','6.0':'Vista','5.1':'XP'};
+      osVersion = m ? (winMap[m[1]] || m[1]) : '';
+    } else if (/Android/i.test(ua)) {
+      os = 'Android';
+      var m = ua.match(/Android ([\d.]+)/);
+      osVersion = m ? m[1] : '';
+    } else if (/iPhone|iPad|iPod/i.test(ua)) {
+      os = 'iOS';
+      var m = ua.match(/OS ([\d_]+)/);
+      osVersion = m ? m[1].replace(/_/g,'.') : '';
+    } else if (/Mac OS X/i.test(ua)) {
+      os = 'macOS';
+      var m = ua.match(/Mac OS X ([\d_]+)/);
+      osVersion = m ? m[1].replace(/_/g,'.') : '';
+    } else if (/Linux/i.test(ua)) {
+      os = 'Linux';
+    }
+
+    // Browser detection
+    if (/Edg\//i.test(ua)) {
+      browser = 'Edge';
+      var m = ua.match(/Edg\/([\d.]+)/);
+      browserVersion = m ? m[1].split('.')[0] : '';
+    } else if (/OPR\//i.test(ua) || /Opera/i.test(ua)) {
+      browser = 'Opera';
+      var m = ua.match(/OPR\/([\d.]+)/);
+      browserVersion = m ? m[1].split('.')[0] : '';
+    } else if (/SamsungBrowser/i.test(ua)) {
+      browser = 'Samsung Browser';
+      var m = ua.match(/SamsungBrowser\/([\d.]+)/);
+      browserVersion = m ? m[1].split('.')[0] : '';
+    } else if (/CriOS/i.test(ua)) {
+      browser = 'Chrome iOS';
+      var m = ua.match(/CriOS\/([\d.]+)/);
+      browserVersion = m ? m[1].split('.')[0] : '';
+    } else if (/FxiOS/i.test(ua)) {
+      browser = 'Firefox iOS';
+      var m = ua.match(/FxiOS\/([\d.]+)/);
+      browserVersion = m ? m[1].split('.')[0] : '';
+    } else if (/Chrome/i.test(ua)) {
+      browser = 'Chrome';
+      var m = ua.match(/Chrome\/([\d.]+)/);
+      browserVersion = m ? m[1].split('.')[0] : '';
+    } else if (/Firefox/i.test(ua)) {
+      browser = 'Firefox';
+      var m = ua.match(/Firefox\/([\d.]+)/);
+      browserVersion = m ? m[1].split('.')[0] : '';
+    } else if (/Safari/i.test(ua)) {
+      browser = 'Safari';
+      var m = ua.match(/Version\/([\d.]+)/);
+      browserVersion = m ? m[1].split('.')[0] : '';
+    }
+
+    return {
+      platform: platform,
+      os: os,
+      os_version: osVersion,
+      browser: browser,
+      browser_version: browserVersion
+    };
+  }
+
+  // ============================================================
+  // Send to Google Sheets
+  // ============================================================
+  function sendToSheet(country, city) {
+    var dev = getDeviceInfo();
+    var now = new Date();
+    var ts  = now.toISOString().replace('T',' ').substring(0,19) + ' UTC';
+
+    var payload = {
+      timestamp:       ts,
+      country:         country  || 'Unknown',
+      city:            city     || 'Unknown',
+      platform:        dev.platform,
+      os:              dev.os,
+      os_version:      dev.os_version,
+      browser:         dev.browser,
+      browser_version: dev.browser_version
+    };
+
+    fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function(){});
+  }
+
+  // ============================================================
+  // Get geo then send
+  // ============================================================
+  function trackClick() {
+    fetch('https://ipapi.co/json/')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        sendToSheet(d.country_name, d.city);
+      })
+      .catch(function(){
+        sendToSheet('Unknown','Unknown');
+      });
+  }
+
+  // ============================================================
+  // CTA click handler
+  // ============================================================
+  function handleClick(e, btn) {
+    e.preventDefault();
+    btn.textContent = 'Loading...';
+    btn.style.background = '#333';
+    trackClick();
+    setTimeout(function(){
+      btn.innerHTML = 'Access Now &nbsp;&rarr;';
+      btn.style.background = '#16a34a';
+      window.location.href = OFFER_URL;
+    }, 1400);
+  }
+</script>
+</body>
+</html>
