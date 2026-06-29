@@ -8,8 +8,32 @@
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{min-height:100%;background:#0d0d0d;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-  body{display:flex;align-items:flex-start;justify-content:center;padding:40px 16px 48px}
-  .wrap{width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  body{display:flex;flex-direction:column;align-items:center;min-height:100vh}
+
+  /* Banner */
+  .banner-top{
+    width:100%;display:flex;justify-content:center;align-items:center;
+    padding:8px 0;background:rgba(0,0,0,0.5);flex-shrink:0;
+  }
+  .banner-bottom{
+    width:100%;display:flex;justify-content:center;align-items:center;
+    padding:8px 0;background:rgba(0,0,0,0.4);margin-top:auto;
+  }
+
+  /* Timer bar */
+  .timer-bar{
+    width:100%;max-width:440px;
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:30px;
+    padding:8px 20px;
+    font-size:14px;
+    color:#ffd700;
+    text-align:center;
+    margin:12px auto 4px;
+  }
+
+  .wrap{width:100%;max-width:440px;display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 16px 36px}
   .badge{display:inline-block;background:#1a0a00;border:1.5px solid #c04a00;color:#e0621a;font-size:12px;font-weight:700;letter-spacing:0.12em;padding:5px 18px;border-radius:999px;margin-bottom:22px}
   h1{font-size:clamp(26px,7vw,36px);font-weight:800;line-height:1.18;margin-bottom:14px;color:#fff}
   .sub{font-size:15px;color:#aaa;line-height:1.6;margin-bottom:28px}
@@ -44,6 +68,26 @@
 </style>
 </head>
 <body>
+
+<!-- BANNER TOP (dari prelander) -->
+<div class="banner-top">
+  <script>
+    atOptions = {
+      'key' : 'f0a9357fc524712b4e1f8906d53dbe9f',
+      'format' : 'iframe',
+      'height' : 50,
+      'width' : 320,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/f0a9357fc524712b4e1f8906d53dbe9f/invoke.js"></script>
+</div>
+
+<!-- TIMER BAR -->
+<div class="timer-bar" id="timerBar">
+  ⏱ Auto redirect in <span id="timerCount">15</span>s...
+</div>
+
 <div class="wrap">
   <div class="badge">18+ ONLY</div>
   <h1>Yeah, we know what<br>you're thinking right now.</h1>
@@ -99,15 +143,51 @@
     Secured &amp; private &middot; No credit card required
   </div>
 </div>
+
+<!-- BANNER BOTTOM (dari prelander) -->
+<div class="banner-bottom">
+  <script>
+    atOptions = {
+      'key' : 'd95408cf651958681e0159f8c3b4a8d9',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/d95408cf651958681e0159f8c3b4a8d9/invoke.js"></script>
+</div>
+
 <script>
   // ============================================================
-  // CONFIG — ganti sesuai kebutuhan
+  // CONFIG
   // ============================================================
   var GIF_1      = "https://imagex1.sx.cdn.live/images/pinporn/2021/11/01/26171159.webp";
   var GIF_2      = "https://imagex1.sx.cdn.live/images/pinporn/2016/08/18/16383003.webp";
   var GIF_3      = "https://imagex1.sx.cdn.live/images/pinporn/2016/05/28/15795813.webp";
-  var OFFER_URL  = "https://www.effectivecpmnetwork.com/mtqzishs?key=40174ac555fe1238c3537ec02e66ffaa"; // <-- GANTI INI
+  var OFFER_URL  = "https://www.effectivecpmnetwork.com/mtqzishs?key=40174ac555fe1238c3537ec02e66ffaa";
   var SHEET_URL  = "https://script.google.com/macros/s/AKfycbziXyWaU52lRGiVV5mX_l7AErP4BHiFtQWZfhr7kuZhbOnGX54wdaTLZwtvQpE-fki9/exec";
+
+  // ============================================================
+  // TIMER 15 DETIK AUTO REDIRECT
+  // ============================================================
+  var timerSecs = 15;
+  var timerEl   = document.getElementById('timerCount');
+  var timerBar  = document.getElementById('timerBar');
+  var redirected = false;
+
+  var autoTimer = setInterval(function(){
+    timerSecs--;
+    timerEl.textContent = timerSecs;
+    if(timerSecs <= 0){
+      clearInterval(autoTimer);
+      if(!redirected){
+        redirected = true;
+        timerBar.innerHTML = '✅ Redirecting now...';
+        window.location.href = OFFER_URL;
+      }
+    }
+  }, 1000);
 
   // ============================================================
   // Load GIFs
@@ -146,13 +226,7 @@
     var osVersion = '';
     var browser = 'Unknown';
     var browserVersion = '';
-
-    // Platform
-    if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) {
-      platform = 'Mobile';
-    }
-
-    // OS detection
+    if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) platform = 'Mobile';
     if (/Windows NT/i.test(ua)) {
       os = 'Windows';
       var m = ua.match(/Windows NT ([\d.]+)/);
@@ -173,8 +247,6 @@
     } else if (/Linux/i.test(ua)) {
       os = 'Linux';
     }
-
-    // Browser detection
     if (/Edg\//i.test(ua)) {
       browser = 'Edge';
       var m = ua.match(/Edg\/([\d.]+)/);
@@ -208,14 +280,7 @@
       var m = ua.match(/Version\/([\d.]+)/);
       browserVersion = m ? m[1].split('.')[0] : '';
     }
-
-    return {
-      platform: platform,
-      os: os,
-      os_version: osVersion,
-      browser: browser,
-      browser_version: browserVersion
-    };
+    return { platform:platform, os:os, os_version:osVersion, browser:browser, browser_version:browserVersion };
   }
 
   // ============================================================
@@ -225,7 +290,6 @@
     var dev = getDeviceInfo();
     var now = new Date();
     var ts  = now.toISOString().replace('T',' ').substring(0,19) + ' UTC';
-
     var payload = {
       timestamp:       ts,
       country:         country  || 'Unknown',
@@ -236,34 +300,27 @@
       browser:         dev.browser,
       browser_version: dev.browser_version
     };
-
     fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
+      method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     }).catch(function(){});
   }
 
-  // ============================================================
-  // Get geo then send
-  // ============================================================
   function trackClick() {
     fetch('https://ipapi.co/json/')
       .then(function(r){ return r.json(); })
-      .then(function(d){
-        sendToSheet(d.country_name, d.city);
-      })
-      .catch(function(){
-        sendToSheet('Unknown','Unknown');
-      });
+      .then(function(d){ sendToSheet(d.country_name, d.city); })
+      .catch(function(){ sendToSheet('Unknown','Unknown'); });
   }
 
   // ============================================================
-  // CTA click handler
+  // CTA click handler — stop auto timer lalu redirect
   // ============================================================
   function handleClick(e, btn) {
     e.preventDefault();
+    clearInterval(autoTimer); // stop timer
+    redirected = true;
     btn.textContent = 'Loading...';
     btn.style.background = '#333';
     trackClick();
