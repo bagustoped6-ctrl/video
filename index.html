@@ -4,23 +4,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
 <title>18+ Only</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{min-height:100%;background:#0d0d0d;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
   body{display:flex;flex-direction:column;align-items:center;min-height:100vh}
 
-  /* Banner */
   .banner-top{
     width:100%;display:flex;justify-content:center;align-items:center;
     padding:8px 0;background:rgba(0,0,0,0.5);flex-shrink:0;
   }
-  .banner-bottom{
-    width:100%;display:flex;justify-content:center;align-items:center;
-    padding:8px 0;background:rgba(0,0,0,0.4);margin-top:auto;
-  }
 
-  /* Timer bar */
   .timer-bar{
     width:100%;max-width:440px;
     background:rgba(255,255,255,0.07);
@@ -69,29 +64,29 @@
 </head>
 <body>
 
-<!-- BANNER TOP (dari prelander) -->
+<!-- BANNER TOP 728x90 -->
 <div class="banner-top">
   <script>
     atOptions = {
-      'key' : 'f0a9357fc524712b4e1f8906d53dbe9f',
+      'key' : 'cc1e693cea3890f3e3a904ea00f02fbe',
       'format' : 'iframe',
-      'height' : 50,
-      'width' : 320,
+      'height' : 90,
+      'width' : 728,
       'params' : {}
     };
   </script>
-  <script src="https://www.highperformanceformat.com/f0a9357fc524712b4e1f8906d53dbe9f/invoke.js"></script>
+  <script src="https://www.highperformanceformat.com/cc1e693cea3890f3e3a904ea00f02fbe/invoke.js"></script>
 </div>
 
 <!-- TIMER BAR -->
 <div class="timer-bar" id="timerBar">
-  ⏱ Auto redirect in <span id="timerCount">15</span>s...
+  ▶ <span id="timerLabel">Watch video in</span> <span id="timerCount">30</span>s...
 </div>
 
 <div class="wrap">
   <div class="badge">18+ ONLY</div>
-  <h1>Yeah, we know what<br>you're thinking right now.</h1>
-  <p class="sub">And honestly? <strong>Same.</strong><br>Just&hellip; see for yourself.</p>
+  <h1 id="h1Text">Yeah, we know what<br>you're thinking right now.</h1>
+  <p class="sub" id="subText">And honestly? <strong>Same.</strong><br>Just&hellip; see for yourself.</p>
   <div class="grid">
     <div class="cell empty" id="cell1">
       <img id="gif1" src="" alt="" style="display:none">
@@ -121,59 +116,145 @@
       </div></div>
     </div>
   </div>
-  <p class="tap-hint">Tap to unblur &mdash; free access, no signup needed</p>
+  <p class="tap-hint" id="tapHint">Tap to unblur &mdash; free access, no signup needed</p>
   <div class="textbox">
-    <p>Look, we're not going to pretend this is something it's not.</p>
-    <p>You landed here. <strong>We both know why.</strong></p>
-    <p>No judgment &mdash; literally everyone does it.</p>
-    <p>(Your browser history is your business. Not ours.)</p>
+    <p id="tb1">Look, we're not going to pretend this is something it's not.</p>
+    <p id="tb2">You landed here. <strong>We both know why.</strong></p>
+    <p id="tb3">No judgment &mdash; literally everyone does it.</p>
+    <p id="tb4">(Your browser history is your business. Not ours.)</p>
   </div>
   <div class="counter">
     <span class="dot"></span>
-    <span><strong style="color:#fff">your area</strong> &mdash; <span id="viewers">605</span> people viewing right now</span>
+    <span><strong style="color:#fff" id="areaText">your area</strong> &mdash; <span id="viewers">605</span> <span id="viewingText">people viewing right now</span></span>
   </div>
   <a href="#" class="cta" id="ctaBtn" onclick="handleClick(event,this)">
-    Fine. I'll click it. &nbsp;&rarr;
+    <span id="ctaText">Fine. I'll click it.</span> &nbsp;&rarr;
   </a>
-  <p class="age-confirm">By continuing you confirm you are 18+ and agree to our terms.</p>
+  <p class="age-confirm" id="ageConfirm">By continuing you confirm you are 18+ and agree to our terms.</p>
   <div class="secured">
     <svg viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
     </svg>
-    Secured &amp; private &middot; No credit card required
+    <span id="securedText">Secured &amp; private &middot; No credit card required</span>
   </div>
-</div>
-
-<!-- BANNER BOTTOM (dari prelander) -->
-<div class="banner-bottom">
-  <script>
-    atOptions = {
-      'key' : 'd95408cf651958681e0159f8c3b4a8d9',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
-    };
-  </script>
-  <script src="https://www.highperformanceformat.com/d95408cf651958681e0159f8c3b4a8d9/invoke.js"></script>
 </div>
 
 <script>
   // ============================================================
   // CONFIG
   // ============================================================
-  var GIF_1      = "https://imagex1.sx.cdn.live/images/pinporn/2021/11/01/26171159.webp";
-  var GIF_2      = "https://imagex1.sx.cdn.live/images/pinporn/2016/08/18/16383003.webp";
-  var GIF_3      = "https://imagex1.sx.cdn.live/images/pinporn/2016/05/28/15795813.webp";
-  var OFFER_URL  = "https://www.effectivecpmnetwork.com/mtqzishs?key=40174ac555fe1238c3537ec02e66ffaa";
-  var SHEET_URL  = "https://script.google.com/macros/s/AKfycbziXyWaU52lRGiVV5mX_l7AErP4BHiFtQWZfhr7kuZhbOnGX54wdaTLZwtvQpE-fki9/exec";
+  var GIF_1     = "https://imagex1.sx.cdn.live/images/pinporn/2021/11/01/26171159.webp";
+  var GIF_2     = "https://imagex1.sx.cdn.live/images/pinporn/2016/08/18/16383003.webp";
+  var GIF_3     = "https://imagex1.sx.cdn.live/images/pinporn/2016/05/28/15795813.webp";
+  var OFFER_URL = "https://www.effectivecpmnetwork.com/y8cnwcr4kw?key=59de1b3ccae58fe3b683c249e4d2968f";
+  var SHEET_URL = "https://script.google.com/macros/s/AKfycbziXyWaU52lRGiVV5mX_l7AErP4BHiFtQWZfhr7kuZhbOnGX54wdaTLZwtvQpE-fki9/exec";
 
   // ============================================================
-  // TIMER 15 DETIK AUTO REDIRECT
+  // MULTI-BAHASA
   // ============================================================
-  var timerSecs = 15;
-  var timerEl   = document.getElementById('timerCount');
-  var timerBar  = document.getElementById('timerBar');
+  var translations = {
+    SE: {
+      timerLabel:  'Se video om',
+      h1:          'Vi vet vad du<br>tänker just nu.',
+      sub:         'Och ärligt talat? <strong>Samma.</strong><br>Se själv.',
+      tapHint:     'Tryck för att avblura &mdash; gratis, ingen registrering',
+      tb1:         'Vi ska inte låtsas att det här är något annat.',
+      tb2:         'Du hamnade här. <strong>Vi vet båda varför.</strong>',
+      tb3:         'Ingen dom &mdash; alla gör det.',
+      tb4:         '(Din webbläsarhistorik är din sak. Inte vår.)',
+      areaText:    'ditt område',
+      viewingText: 'tittar just nu',
+      ctaText:     'Okej. Jag klickar.',
+      ageConfirm:  'Genom att fortsätta bekräftar du att du är 18+ och godkänner våra villkor.',
+      securedText: 'Säker &amp; privat &middot; Inget kreditkort krävs',
+    },
+    DE: {
+      timerLabel:  'Video ansehen in',
+      h1:          'Wir wissen, was du<br>gerade denkst.',
+      sub:         'Und ehrlich gesagt? <strong>Genau das.</strong><br>Sieh selbst.',
+      tapHint:     'Tippen zum Entblurren &mdash; kostenlos, keine Anmeldung',
+      tb1:         'Wir tun nicht so, als wäre das etwas anderes.',
+      tb2:         'Du bist hier gelandet. <strong>Wir beide wissen warum.</strong>',
+      tb3:         'Kein Urteil &mdash; jeder macht das.',
+      tb4:         '(Dein Browserverlauf ist deine Sache. Nicht unsere.)',
+      areaText:    'deine Region',
+      viewingText: 'Personen schauen gerade',
+      ctaText:     'Na gut. Ich klick\'s.',
+      ageConfirm:  'Mit dem Fortfahren bestätigst du, dass du 18+ bist und unseren Bedingungen zustimmst.',
+      securedText: 'Sicher &amp; privat &middot; Keine Kreditkarte erforderlich',
+    },
+    CA: {
+      timerLabel:  'Voir la vidéo dans',
+      h1:          'On sait ce que tu<br>penses en ce moment.',
+      sub:         'Et franchement ? <strong>Pareil.</strong><br>Vois par toi-même.',
+      tapHint:     'Appuie pour déflou &mdash; gratuit, sans inscription',
+      tb1:         'On va pas faire semblant que c\'est autre chose.',
+      tb2:         'Tu es arrivé ici. <strong>On sait tous les deux pourquoi.</strong>',
+      tb3:         'Sans jugement &mdash; tout le monde le fait.',
+      tb4:         '(Ton historique est ton affaire. Pas la nôtre.)',
+      areaText:    'ta région',
+      viewingText: 'personnes regardent maintenant',
+      ctaText:     'OK. Je clique.',
+      ageConfirm:  'En continuant, tu confirmes avoir 18+ ans et acceptes nos conditions.',
+      securedText: 'Sécurisé &amp; privé &middot; Aucune carte requise',
+    },
+    JP: {
+      timerLabel:  '動画を見る まで',
+      h1:          'あなたが今<br>考えていること、わかってます。',
+      sub:         '正直に言うと？ <strong>同じです。</strong><br>自分で確かめて。',
+      tapHint:     'タップしてぼかし解除 &mdash; 無料・登録不要',
+      tb1:         'これが何か別のものだとふりをするつもりはありません。',
+      tb2:         'あなたはここに来た。<strong>理由はお互いわかってる。</strong>',
+      tb3:         '判断しません &mdash; みんなやってることです。',
+      tb4:         '（ブラウザ履歴はあなたの秘密。私たちは関係ない。）',
+      areaText:    'あなたの地域',
+      viewingText: '人が今見ています',
+      ctaText:     'わかった。クリックする。',
+      ageConfirm:  '続けることで、18歳以上であり利用規約に同意することを確認します。',
+      securedText: '安全 &amp; プライベート &middot; クレジットカード不要',
+    },
+    EN: {
+      timerLabel:  'Watch video in',
+      h1:          'Yeah, we know what<br>you\'re thinking right now.',
+      sub:         'And honestly? <strong>Same.</strong><br>Just&hellip; see for yourself.',
+      tapHint:     'Tap to unblur &mdash; free access, no signup needed',
+      tb1:         'Look, we\'re not going to pretend this is something it\'s not.',
+      tb2:         'You landed here. <strong>We both know why.</strong>',
+      tb3:         'No judgment &mdash; literally everyone does it.',
+      tb4:         '(Your browser history is your business. Not ours.)',
+      areaText:    'your area',
+      viewingText: 'people viewing right now',
+      ctaText:     'Fine. I\'ll click it.',
+      ageConfirm:  'By continuing you confirm you are 18+ and agree to our terms.',
+      securedText: 'Secured &amp; private &middot; No credit card required',
+    }
+  };
+
+  var langRaw = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+  var country = langRaw.includes('-') ? langRaw.split('-')[1].toUpperCase() : langRaw.toUpperCase();
+  var t = translations[country] || translations['EN'];
+
+  // Terapkan teks
+  document.getElementById('timerLabel').textContent   = t.timerLabel;
+  document.getElementById('h1Text').innerHTML         = t.h1;
+  document.getElementById('subText').innerHTML        = t.sub;
+  document.getElementById('tapHint').innerHTML        = t.tapHint;
+  document.getElementById('tb1').innerHTML            = t.tb1;
+  document.getElementById('tb2').innerHTML            = t.tb2;
+  document.getElementById('tb3').innerHTML            = t.tb3;
+  document.getElementById('tb4').innerHTML            = t.tb4;
+  document.getElementById('areaText').textContent     = t.areaText;
+  document.getElementById('viewingText').textContent  = t.viewingText;
+  document.getElementById('ctaText').textContent      = t.ctaText;
+  document.getElementById('ageConfirm').textContent   = t.ageConfirm;
+  document.getElementById('securedText').innerHTML    = t.securedText;
+
+  // ============================================================
+  // TIMER 30 DETIK AUTO REDIRECT
+  // ============================================================
+  var timerSecs  = 30;
+  var timerEl    = document.getElementById('timerCount');
+  var timerBar   = document.getElementById('timerBar');
   var redirected = false;
 
   var autoTimer = setInterval(function(){
@@ -184,7 +265,7 @@
       if(!redirected){
         redirected = true;
         timerBar.innerHTML = '✅ Redirecting now...';
-        window.location.href = OFFER_URL;
+        window.location.href = OFFER_URL; // ✅ redirect langsung
       }
     }
   }, 1000);
@@ -315,11 +396,11 @@
   }
 
   // ============================================================
-  // CTA click handler — stop auto timer lalu redirect
+  // CTA click handler
   // ============================================================
   function handleClick(e, btn) {
     e.preventDefault();
-    clearInterval(autoTimer); // stop timer
+    clearInterval(autoTimer);
     redirected = true;
     btn.textContent = 'Loading...';
     btn.style.background = '#333';
@@ -327,7 +408,7 @@
     setTimeout(function(){
       btn.innerHTML = 'Access Now &nbsp;&rarr;';
       btn.style.background = '#16a34a';
-      window.location.href = OFFER_URL;
+      window.location.href = OFFER_URL; // ✅ redirect langsung
     }, 1400);
   }
 </script>
